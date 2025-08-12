@@ -1,5 +1,5 @@
 streamlit
-supabase-python
+supabase
 python-dotenv
 openai
 pandas
