@@ -295,7 +295,7 @@ with st.sidebar:
             if auth.get('user') and auth['user'].get('id'):
                 st.success('تم تسجيل الدخول')
                 st.session_state.user = auth['user']
-                st.experimental_rerun()
+                st.st.rerun()
             else:
                 st.error(f"فشل تسجيل الدخول. {auth.get('error','تأكد من البريد/كلمة المرور.')}")
     else:
@@ -303,7 +303,7 @@ with st.sidebar:
         if st.button('تسجيل خروج'):
             sign_out()
             st.session_state.user = None
-            st.experimental_rerun()
+            st.st.rerun()
 
 # Require login
 if not st.session_state.user:
@@ -365,7 +365,7 @@ if role == 'admin' and page == 'كل المهام':
                 if create_btn:
                     create_task(title, owner_select[0], desc, due, metadata={})
                     st.success('تم إنشاء المهمة')
-                    st.experimental_rerun()
+                    st.st.rerun()
         st.markdown('---')
         st.subheader('تعديل / حذف مهمة')
         task_ids = df['id'].tolist()
@@ -382,11 +382,11 @@ if role == 'admin' and page == 'كل المهام':
                         updates['completed_at'] = datetime.utcnow().isoformat() + "Z"
                     update_task(sel, updates)
                     st.success('تم التحديث')
-                    st.experimental_rerun()
+                    st.st.rerun()
                 if st.button('حذف المهمة'):
                     delete_task(sel)
                     st.success('تم الحذف')
-                    st.experimental_rerun()
+                    st.st.rerun()
 
 if role == 'admin' and page == 'Admin Dashboard':
     st.header('لوحة المدير')
@@ -487,7 +487,7 @@ if role == 'user':
                             updates['completed_at'] = datetime.utcnow().isoformat() + "Z"
                         update_task(t.get('id'), updates)
                         st.success('تم التحديث')
-                        st.experimental_rerun()
+                        st.st.rerun()
                 with cols[3]:
                     if st.button(f'تفاصيل {t.get("id")}', key=f'det_{t.get("id")}'):
                         st.json(t)
