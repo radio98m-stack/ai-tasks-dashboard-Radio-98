@@ -224,7 +224,8 @@ def summarize_tasks_openai(tasks: list) -> str:
     if not OPENAI_API_KEY or openai is None:
         # fallback simple summary
         done = [t for t in tasks if t.get('status') == 'done']
-        s = f"تم إنجاز {len(done)} مهمة. عناوين المهام:
+        s = f"""تم إنجاز {len(done)} مهمة. عناوين المهام:
+{'\n'.join([f"- {t.get('title')}" for t in done[:10]])}"""
 " + '\n'.join([f"- {t.get('title')}" for t in done[:10]])
         return s
     texts = '\n'.join([f"{t.get('title')}: {t.get('description','')}" for t in tasks if t.get('status') == 'done'])
