@@ -226,7 +226,8 @@ def summarize_tasks_openai(tasks: list) -> str:
         done = [t for t in tasks if t.get('status') == 'done']
         s = f"""تم إنجاز {len(done)} مهمة. عناوين المهام:
 {'\n'.join([f"- {t.get('title')}" for t in done[:10]])}"""
-" + '\n'.join([f"- {t.get('title')}" for t in done[:10]])
+s = f"""تم إنجاز {len(done)} مهمة. عناوين المهام:
+{'\n'.join([f"- {t.get('title')}" for t in done[:10]])}"""
         return s
     texts = '\n'.join([f"{t.get('title')}: {t.get('description','')}" for t in tasks if t.get('status') == 'done'])
     prompt = "لخص التالي باختصار عربي نقاط مرتبة:\n" + texts
